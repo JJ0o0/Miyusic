@@ -14,6 +14,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(${CMAKE_PROJECT_NAME}
     "src/main.c"
+    "src/player.c"
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME}
@@ -26,4 +27,9 @@ target_compile_options(${CMAKE_PROJECT_NAME}
         -Wall
         -Wextra
         -Wpedantic
+)
+
+target_compile_definitions(${CMAKE_PROJECT_NAME} 
+    PRIVATE
+        _POSIX_C_SOURCE=200809L
 )
