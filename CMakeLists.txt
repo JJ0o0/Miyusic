@@ -12,6 +12,11 @@ set(CMAKE_C_EXTENSIONS OFF)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+find_package(cJSON CONFIG REQUIRED)
+
+set(CURSES_NEED_NCURSES TRUE)
+find_package(Curses REQUIRED)
+
 add_executable(${CMAKE_PROJECT_NAME}
     "src/main.c"
     "src/player.c"
@@ -19,7 +24,14 @@ add_executable(${CMAKE_PROJECT_NAME}
 
 target_include_directories(${CMAKE_PROJECT_NAME}
     PRIVATE
+        ${CURSES_INCLUDE_DIRS}
         "${PROJECT_SOURCE_DIR}/include"
+)
+
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    PRIVATE 
+        cjson
+        ${CURSES_LIBRARIES}
 )
 
 target_compile_options(${CMAKE_PROJECT_NAME}
